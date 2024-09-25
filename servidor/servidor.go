@@ -170,14 +170,14 @@ func AtualizarUsuario(w http.ResponseWriter, r *http.Request) {
 
 	defer db.Close()
 
-	statatement, erro := db.Prepare("update usuarios set nome =?, email =? where id=?")
+	statement, erro := db.Prepare("update usuarios set nome =?, email =? where id=?")
 	if erro != nil {
 		w.Write([]byte("Erro ao criar statement"))
 		return
 	}
-	defer statatement.Close()
+	defer statement.Close()
 
-	if _, erro := statatement.Exec(usuario.Nome, usuario.Email, ID); erro != nil {
+	if _, erro := statement.Exec(usuario.Nome, usuario.Email, ID); erro != nil {
 		w.Write([]byte("Erro ao atualizar usuario"))
 		return
 	}
